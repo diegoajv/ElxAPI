@@ -8,11 +8,11 @@ defmodule RestApiWeb.ProjectController do
 
   def index(conn, _params) do
     projects = Management.list_projects()
-    render(conn, "index.json", data: projects)
+    render(conn, "index.json-api", data: projects)
   end
 
   def show(conn, %{"id" => id}) do
     project = Management.get_project!(id)
-    render(conn, "show.json", data: project)
+    render(conn, "show.json-api", data: project)
   end
 end
