@@ -9,7 +9,7 @@ defmodule RestApi.Management.Document do
     field :view_count, :integer
     field :published, :boolean
 
-    belongs_to :project, RestApi.Management
+    belongs_to :project, RestApi.Management.Project
 
     timestamps()
   end
