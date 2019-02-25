@@ -6,6 +6,7 @@ defmodule GraphqlApi.Admin.User do
   schema "users" do
     field :email, :string
     field :name, :string
+    has_many :posts, GraphqlApi.Blog.Post
 
     timestamps()
   end
