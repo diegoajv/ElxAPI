@@ -43,7 +43,8 @@ defmodule GraphqlApi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.3.1"},
       {:absinthe_plug, "~> 1.3.0"},
-      {:absinthe_ecto, "~> 0.1.3"}
+      {:absinthe_ecto, "~> 0.1.3"},
+      {:faker, "~> 0.12"}
     ]
   end
 
