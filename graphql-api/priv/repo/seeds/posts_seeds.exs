@@ -1,5 +1,5 @@
 alias GraphqlApi.Repo
-alias GraphqlApi.Admin.Post
+alias GraphqlApi.Blog.Post
 
 for _ <- 1..10 do
   Repo.insert!(%Post{
