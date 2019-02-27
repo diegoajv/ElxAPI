@@ -20,7 +20,7 @@ defmodule GraphqlApi.MixProject do
   def application do
     [
       mod: {GraphqlApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :absinthe_plug]
     ]
   end
 
@@ -41,10 +41,11 @@ defmodule GraphqlApi.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:absinthe, "~> 1.3.1"},
-      {:absinthe_plug, "~> 1.3.0"},
+      {:faker, "~> 0.12"},
+      {:absinthe, "~> 1.4"},
       {:absinthe_ecto, "~> 0.1.3"},
-      {:faker, "~> 0.12"}
+      {:absinthe_plug, "~> 1.4"},
+      {:poison, "~> 3.1"}
     ]
   end
 
