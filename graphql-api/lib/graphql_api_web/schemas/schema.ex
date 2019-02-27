@@ -3,6 +3,11 @@ defmodule GraphqlApiWeb.Schemas.Schema do
   alias GraphqlApiWeb.Resolvers
   import_types GraphqlApiWeb.Schemas.Types
 
+  input_object :user_filter do
+    field :name, :string
+    field :email, :string
+  end
+
   query do
 
     field :posts, list_of(:post) do
@@ -10,7 +15,8 @@ defmodule GraphqlApiWeb.Schemas.Schema do
     end
 
     field :users, list_of(:user) do
-      resolve &Resolvers.UserResolver.all/2
+      arg :filter, :user_filter
+      resolve &Resolvers.UserResolver.all/3
     end
 
     field :user, :user do

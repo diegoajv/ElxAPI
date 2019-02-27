@@ -17,8 +17,23 @@ defmodule GraphqlApi.Admin do
       [%User{}, ...]
 
   """
-  def list_users do
-    Repo.all(User)
+  def list_users(filters) do
+    filters
+    |> Enum.reduce(User, fn
+      {:filter, filter}, entity ->
+        entity
+        |> filter_with(filter)
+    end)
+    |> Repo.all
+  end
+
+  def filter_with(entity, filter) do
+    Enum.reduce(filter, entity, fn
+      {:name, name}, entity ->
+        from e in entity, where: ilike(e.name, ^"%#{name}%")
+      {:email, email}, entity ->
+        from e in entity, where: ilike(e.email, ^"%#{email}%")
+    end)
   end
 
   @doc """
