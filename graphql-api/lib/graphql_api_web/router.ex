@@ -1,11 +1,10 @@
 defmodule GraphqlApiWeb.Router do
   use GraphqlApiWeb, :router
+  alias GraphqlApiWeb.Schemas
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  forward "/api", Absinthe.Plug,
+    schema: Schemas.Schema
 
-  scope "/api", GraphqlApiWeb do
-    pipe_through :api
-  end
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: Schemas.Schema
 end
