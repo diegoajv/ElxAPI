@@ -1,12 +1,12 @@
 defmodule GraphqlApi.Blog.Post do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias GraphqlApi.Admin
 
   schema "posts" do
-    field :body, :string
     field :title, :string
-    field :user_id, :id
+    field :body, :string
+    belongs_to :user, Admin.User
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule GraphqlApi.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:title, :body, :user_id])
+    |> validate_required([:title, :body, :user_id])
   end
 end

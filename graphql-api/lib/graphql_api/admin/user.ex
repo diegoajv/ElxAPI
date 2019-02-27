@@ -1,12 +1,12 @@
 defmodule GraphqlApi.Admin.User do
   use Ecto.Schema
   import Ecto.Changeset
-
+  alias GraphqlApi.Blog
 
   schema "users" do
     field :email, :string
     field :name, :string
-    has_many :posts, GraphqlApi.Blog.Post
+    has_many :posts, Blog.Post
 
     timestamps()
   end
