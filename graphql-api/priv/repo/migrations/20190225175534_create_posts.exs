@@ -5,6 +5,7 @@ defmodule GraphqlApi.Repo.Migrations.CreatePosts do
     create table(:posts) do
       add :title, :string
       add :body, :text
+      add :data, :map
       add :user_id, references(:users, on_delete: :nothing)
 
       timestamps()
