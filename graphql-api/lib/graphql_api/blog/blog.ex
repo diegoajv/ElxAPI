@@ -17,8 +17,28 @@ defmodule GraphqlApi.Blog do
       [%Post{}, ...]
 
   """
-  def list_posts do
-    Repo.all(Post)
+  def list_posts(rules) do
+    rules
+    |> Enum.reduce(Post, fn
+      {:rules, rule}, entity ->
+        entity
+        |> rule_with(rule)
+    end)
+    |> Repo.all()
+  end
+
+  def rule_with(entity, rule) do
+    Enum.reduce(rule, entity, fn
+      {:site, site}, entity ->
+        from e in entity, where:
+          fragment("?->>? ILIKE ?", e.data, "site", ^site)
+      {:section, section}, entity ->
+        from e in entity, where:
+          fragment("?->>? ILIKE ?", e.data, "section", ^section)
+      {:topic, topic}, entity ->
+        from e in entity, where:
+          fragment("?->>? ILIKE ?", e.data, "topic", ^topic)
+    end)
   end
 
   @doc """

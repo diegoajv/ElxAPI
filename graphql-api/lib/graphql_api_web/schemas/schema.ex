@@ -8,10 +8,16 @@ defmodule GraphqlApiWeb.Schemas.Schema do
     field :email, :string
   end
 
-  query do
+  input_object :post_rules do
+    field :site, :string
+    field :section, :string
+    field :topic, :string
+  end
 
+  query do
     field :posts, list_of(:post) do
-      resolve &Resolvers.PostResolver.all/2
+      arg :rules, :post_rules
+      resolve &Resolvers.PostResolver.all/3
     end
 
     field :users, list_of(:user) do
